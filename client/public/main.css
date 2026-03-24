@@ -1,0 +1,59 @@
+/* --- Compose layout fix --- */
+#compose {
+  margin-top: 10px;
+}
+
+#compose .compose-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#compose .compose-row-bottom {
+  margin-top: 8px;
+}
+
+#compose #to {
+  width: 260px;
+}
+
+#compose #subject {
+  flex: 1;
+  min-width: 200px;
+}
+
+#compose #body {
+  flex: 1;
+  min-width: 300px;
+  resize: vertical;
+}
+
+#compose #sendBtn {
+  height: 36px;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+/* --- Message list polish --- */
+#messageList li {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+#messageList li:hover {
+  background: #f2f6ff;
+}
+
+#messageList li.selected {
+  background: #dceaff;
+}
+
+.muted {
+  color: #666;
+  font-size: 0.9em;
+}
+
+#messageList li.selected {
+  background: #dceaff;
+}

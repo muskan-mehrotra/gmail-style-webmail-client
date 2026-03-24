@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MailBag Webmail</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Personal project</p>
+      <h1>MailBag Webmail</h1>
+    </div>
+    <div id="status" class="status-pill">Disconnected</div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel sidebar-panel">
+      <div class="panel-heading">
+        <h2>Mailboxes</h2>
+        <span class="panel-subtext">Folders</span>
+      </div>
+      <ul id="mailboxList" class="mailbox-list"></ul>
+    </aside>
+
+    <section class="panel messages-panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Messages</h2>
+          <span id="mailboxTitle" class="panel-subtext">INBOX</span>
+        </div>
+        <div class="toolbar">
+          <input id="searchBox" placeholder="Search messages..." />
+          <div class="pager">
+            <button id="prevBtn" type="button">Prev</button>
+            <button id="nextBtn" type="button">Next</button>
+          </div>
+        </div>
+      </div>
+      <ul id="messageList" class="message-list"></ul>
+    </section>
+
+    <section class="panel detail-panel">
+      <div class="panel-heading">
+        <h2>Message</h2>
+        <button id="deleteBtn" type="button" class="danger-btn" disabled>Delete</button>
+      </div>
+
+      <div id="messageMeta" class="message-meta empty-state">Select a message to preview it here.</div>
+      <pre id="messageView" class="message-view">(select a message)</pre>
+
+      <section class="compose-card">
+        <div class="panel-heading compose-heading">
+          <div>
+            <h2>Compose</h2>
+            <span class="panel-subtext">Send a new email</span>
+          </div>
+        </div>
+
+        <div id="compose">
+          <div class="field-group">
+            <label for="to">To</label>
+            <input id="to" placeholder="recipient@example.com" />
+          </div>
+
+          <div class="field-group">
+            <label for="subject">Subject</label>
+            <input id="subject" placeholder="Enter subject" />
+          </div>
+
+          <div class="field-group">
+            <label for="body">Message</label>
+            <textarea id="body" placeholder="Write your email here..." rows="8"></textarea>
+          </div>
+
+          <div class="compose-actions">
+            <button id="sendBtn" type="button">Send</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="/dist/bundle.js"></script>
+</body>
+</html>

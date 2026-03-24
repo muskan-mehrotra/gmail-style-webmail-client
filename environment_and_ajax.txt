@@ -1,0 +1,148 @@
+MAILBAG WEBMAIL CLIENT – ENVIRONMENT AND TESTING DESCRIPTION
+Practice M7 – Web Programming
+
+1. ENVIRONMENT USED FOR DEVELOPMENT AND TESTING:
+MacOS Tahoe 26.2
+Computer Architecture: ARM64 (Apple M4)
+Node.js Version: v25.5.0
+npm Version: 11.8.0
+Browser Used for Testing: Google Chrome 143 (Official Build)
+
+The project was developed and tested on a MacBook using Node.js and npm.
+The client-side application is bundled using Webpack and served using the
+Webpack development server. The MailBag server from the previous assignment
+(M6) runs on port 8080 and communicates with Gmail using IMAP and SMTP.
+
+Client UI runs on:
+http://localhost:3002/ (or webpack dev server port)
+
+Server API runs on:
+http://localhost:8080
+
+
+2. PROJECT STRUCTURE AND FILE DESCRIPTIONS:
+The MailBag webmail client is responsible for providing the user interface
+for interacting with the MailBag server.
+
+Main files used in the client-side application:
+
+client/src/api.ts
+This file contains functions that communicate with the MailBag server REST
+API. It uses the Fetch API to send HTTP requests such as retrieving mailboxes,
+listing messages, opening messages, deleting messages, and sending emails.
+
+Important API functions include:
+- health() : checks server connectivity
+- listMailboxes() : retrieves available mailboxes from the server
+- listMessages() : retrieves messages from a mailbox with pagination
+- getMessage() : retrieves the full content of a specific email
+- deleteMessage() : deletes a message from the mailbox
+- send() : sends an email using the server SMTP service
+
+client/src/main.ts
+This is the main client application logic. It connects the user interface
+with the API functions. It loads mailboxes, displays messages, handles search,
+pagination, opening emails, deleting emails, and composing new messages.
+
+Additional features implemented include:
+- Sorting messages so the newest emails appear at the top
+- Message highlighting when selected
+- Search filtering for mailbox messages
+- Pagination using limit and offset parameters
+
+client/public/index.html
+This file defines the structure of the user interface including:
+- Mailbox list
+- Message list
+- Message view area
+- Compose email form
+
+client/public/css/main.css
+Contains styling rules for layout, message highlighting, compose section
+alignment, and improved readability of the email interface.
+
+webpack.config.js
+Webpack configuration used to bundle the TypeScript client code into
+browser-compatible JavaScript.
+
+
+3. HOW AJAX IS USED IN THE WEB APPLICATION:
+AJAX (Asynchronous JavaScript and XML) allows the MailBag client to
+communicate with the server without refreshing the web page.
+
+In this project, AJAX is implemented using the Fetch API. The client
+sends asynchronous HTTP requests to the MailBag REST API to perform
+operations such as retrieving mailboxes, loading messages, opening
+emails, deleting emails, and sending new messages.
+
+For example:
+- When the application loads, an AJAX request is sent to /health
+  to confirm the server is running.
+- When a mailbox is clicked, an AJAX request retrieves the messages
+  from that mailbox.
+- When a message is clicked, an AJAX request retrieves the message
+  contents.
+- When the user sends an email, an AJAX POST request is sent to the
+  server's /send endpoint.
+
+Using AJAX allows the interface to update dynamically without
+reloading the page. This creates a smoother and more responsive
+user experience similar to modern webmail systems.
+
+
+4. HOW THE APPLICATION WAS TESTED:
+Several tests were performed to ensure the webmail client works correctly.
+
+Server Connectivity Test:
+The client first calls the /health endpoint to verify that the MailBag
+server is running and accessible. If the response returns { "ok": true },
+the client displays "Connected" in the interface.
+
+Mailbox Retrieval Test:
+The client sends a request to /mailboxes to retrieve the list of mailboxes
+such as INBOX, Sent Mail, and Trash. The returned list is displayed in the
+mailbox panel of the UI.
+
+Message Retrieval Test:
+Selecting a mailbox sends a request to
+/mailboxes/{mailbox}/messages?limit=10&offset=0
+to retrieve messages from that mailbox.
+
+Pagination Test:
+Next and Previous buttons were tested to confirm that the limit and offset
+parameters correctly load different sets of messages.
+
+Search Test:
+Typing keywords in the search box sends a query request to filter messages.
+The server returns only messages matching the search term.
+
+Open Message Test:
+Clicking a message sends a request to
+/mailboxes/{mailbox}/messages/{uid}
+and displays the email content in the message view panel.
+
+Send Email Test:
+The compose section allows the user to send a new email. The client sends
+a POST request to /send with the message details. Successful sending was
+verified by checking the Gmail Sent Mail folder.
+
+Delete Email Test:
+After selecting a message, the Delete button sends a DELETE request to
+/mailboxes/{mailbox}/messages/{uid}. The message is removed from the mailbox
+and the UI refreshes.
+
+Cross-Browser Testing:
+The application was tested primarily on Google Chrome. Since it relies on
+standard web technologies such as HTML, CSS, JavaScript, and the Fetch API,
+it should work on all modern browsers including Firefox, Safari, and Edge.
+
+
+5. SUMMARY
+This project implements the client-side component of the MailBag webmail
+system. It communicates with the MailBag server through REST APIs using
+AJAX requests. The application allows users to view mailboxes, read emails,
+search messages, send new emails, and delete messages.
+
+The use of AJAX ensures that all interactions with the mail server occur
+asynchronously, providing a smooth and responsive user experience without
+page reloads.
